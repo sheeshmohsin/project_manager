@@ -4,6 +4,29 @@
 			<div class="page-header">
 				<h1>Project <small>List</small></h1>
 			</div>
+			<table class="table table-bordered table-striped table-hover">
+				<thead>
+					<tr>
+						<th>Name</th>
+						<th>Client</th>
+						<th>Due Date</th>
+						<th>Status</th>
+					</tr>
+				</thead>
+				<tbody>
+					{{#each projectList}}
+						{{>projectRow}}
+					{{/each}}
+				</tbody>
+			</table>
 		</div>
 	</div>
+</template>
+<template name="projectRow">
+	<tr class="projectRow">
+		<td>{{name}}</td>
+		<td>{{client}}</td>
+		<td>{{duedate}}</td>
+		<td>{{status}}</td>
+	</tr>
 </template>

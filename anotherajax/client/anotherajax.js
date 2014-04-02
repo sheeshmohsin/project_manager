@@ -6,6 +6,14 @@
 	'/projects':'projects',
 	'/employees':'employees'
 	})
+  Handlebars.registerHelper("formatDate", function(date){
+    if(moment) {
+      return moment(datetime).format("MM/DD/YYYY");
+    }
+    else {
+      return datetime;
+    }
+  });
   Template.menu.appName = function() {
   	return Session.get('appName');
   }

@@ -23,7 +23,10 @@
   }
   Template.projectForm.events({
     'click .save':function(evt, tmpl){
-
+      var name = tmpl.find('.name'.value);
+      var client = tmpl.find('.client'.value);
+      addProject(name,client);
+      Session.set('showProjectDialog',false);
     },
     'click .cancel':function(evt, tmpl){
       Session.set('showProjectDialog', false);
@@ -36,6 +39,9 @@
   })
   Template.projects.showProjectDialog = function(){
     return Session.get('showProjectDialog');
+  }
+  var addProject = function(name,client){
+    Projects.insert({name:name,client:client});
   }
 }
 

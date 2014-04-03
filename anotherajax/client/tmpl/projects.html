@@ -1,10 +1,13 @@
 <template name="projects">
+	{{#if showProjectDialog}}
 	{{>projectForm}}
+	{{/if}}
 	<div class="container-fluid">
 		<div class="row-fluid">
 			<div class="page-header">
 				<h1>Project <small>List</small></h1>
 			</div>
+			<button class="btn btn-large btn-success addProject">Add Project</button>
 			<table class="table table-bordered table-striped table-hover">
 				<thead>
 					<tr>
@@ -34,7 +37,7 @@
  <template name="projectForm">
 	<div id="example" class="modal">
 	<div class="modal-header">
-	<a class="close" data-dismiss="modal">x</a>
+	<a class="close cancel" data-dismiss="modal">x</a>
 	<h3>Add Project</h3>
 	</div>
 	<div class="modal-body">
@@ -43,7 +46,7 @@
 		<label for="client">Client</label><input class="input input-xlarge client" type="text" name="client" value="" id="client">
 	</div>
 	<div class="modal-footer">
-	<a href="#" class="btn btn-success">Save</a>
-	<a href="#" class="btn" data-dismiss="modal">Cancel</a>
+	<a href="#" class="btn btn-success save">Save</a>
+	<a href="#" class="btn cancel" data-dismiss="modal">Cancel</a>
 	</div>
 </template>

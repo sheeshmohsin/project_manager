@@ -38,7 +38,11 @@
 	<div id="example" class="modal">
 	<div class="modal-header">
 	<a class="close cancel" data-dismiss="modal">x</a>
+	{{#if editing_project}}
+	<h3>Update Project</h3>
+	{{else}}
 	<h3>Add Project</h3>
+	{{/if}}
 	</div>
 	<div class="modal-body">
 		<label for="name">Name:</label>
@@ -50,8 +54,12 @@
 		</select>
 	</div>
 	<div class="modal-footer">
-	<a href="#" class="btn btn-success save">Save</a>
-	<a href="#" class="btn cancel" data-dismiss="modal">Cancel</a>
+		{{#if editing_project}}
+		<a href="#" class="btn btn-warning save">Update</a>
+		{{else}}
+		<a href="#" class="btn btn-success save">Save</a>
+		{{/if}}
+		<a href="#" class="btn cancel" data-dismiss="modal">Cancel</a>
 	</div>
 	</div>
 </template>

@@ -27,11 +27,17 @@
       var name = tmpl.find('.name').value;
       var client = tmpl.find('.client').value;
       var status = tmpl.find('.status').value;
+      if(Session.get('editing_project')) {
+        updateProject(name,client,status);
+      } else {
       addProject(name,client,status);
+      }
       Session.set('showProjectDialog',false);
+      Session.set('editing_project',null);
     },
     'click .cancel':function(evt, tmpl){
       Session.set('showProjectDialog', false);
+      Session.set('editing_project',null);
     }
   })
   Template.projects.events({
@@ -39,6 +45,10 @@
       Session.set('showProjectDialog', true);
     }
   })
+  Template.projectForm.rendered = function(){
+    var project = Projects.findOne({_id:Session.get('editing_project')})
+    $('.status').val(project.status);
+  }
   Template.projectRow.events({
     'dblclick .projectRow':function(evt, tmpl){
       Session.set('editing_project',tmpl.data._id)
@@ -48,11 +58,18 @@
   Template.projectForm.project = function(){
     return Projects.findOne({_id:Session.get('editing_project')})
   }
+  Template.projectForm.editing_project = function(){
+    return Session.get('editing_project');
+  }
   Template.projects.showProjectDialog = function(){
     return Session.get('showProjectDialog');
   }
   var addProject = function(name,client,status){
     Projects.insert({name:name,client:client,status:status});
+  }
+  var updateProject = function(name,client,status){
+    Projects.update(Session.get('editing_project'), {$set: {name:name,client:client,status:status}});
+    return true;
   }
 }
 

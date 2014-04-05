@@ -38,6 +38,11 @@
     'click .cancel':function(evt, tmpl){
       Session.set('showProjectDialog', false);
       Session.set('editing_project',null);
+    },
+    'click .remove':function(evt,tmpl){
+      removeProject();
+      Session.set('showProjectDialog',false)
+      Session.set('editing_project',null)
     }
   })
   Template.projects.events({
@@ -70,6 +75,9 @@
   var updateProject = function(name,client,status){
     Projects.update(Session.get('editing_project'), {$set: {name:name,client:client,status:status}});
     return true;
+  }
+  var removeProject = function(){
+    Projects.remove({_id:Session.get('editing_project')});
   }
 }
 

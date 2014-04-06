@@ -3,6 +3,9 @@
  	Session.setDefault('appName', 'Project Manager');
   Session.setDefault('showProjectDialog', false);
   Session.setDefault('editing_project', null);
+  Session.setDefault('employees_active', false);
+  Session.setDefault('projects_active', false);
+  Session.setDefault('home_active', false);
   Meteor.Router.add({
 	'/':'homepage',
 	'/projects':'projects',
@@ -22,6 +25,32 @@
   Template.projects.projectList = function(){
   	return Projects.find()
   }
+  Template.menu.home_active = function() {
+    return Session.get('home_active');
+  }
+  Template.menu.projects_active = function() {
+    return Session.get('projects_active');
+  }
+  Template.menu.employees_active = function() {
+    return Session.get('employees_active');
+  }
+  Template.menu.events({
+    'click .home':function(evt,tmpl){
+      Session.set('home_active',true);
+      Session.set('projects_active',false);
+      Session.set('employees_active',false);
+    },
+    'click .projects':function(evt,tmpl){
+      Session.set('home_active',false);
+      Session.set('projects_active',true);
+      Session.set('employees_active',false);
+    },
+    'click .employees':function(evt,tmpl){
+      Session.set('home_active',false);
+      Session.set('projects_active',false);
+      Session.set('employees_active',true);
+    }
+  })
   Template.projectForm.events({
     'click .save':function(evt, tmpl){
       var name = tmpl.find('.name').value;

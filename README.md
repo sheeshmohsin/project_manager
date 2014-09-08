@@ -1,4 +1,7 @@
-meteor_example
-==============
+A Simple Project Manager App.
+=============================
 
-Learning Meteor
+This app is launched on meteor server on this url:-
+---------------------------------------------------
+
+http://manageyourproject.meteor.com/
